@@ -24,10 +24,10 @@
        
             $gyproba = $_POST["gyartasiev"];
             if(preg_match("/[0-9]{4,}/",$gyproba)){
-                $telefon = $gyproba;
+                $gyartasiev = $gyproba;
                
             }
-
+        }
 
         if(!empty($_POST["elerhetoseg"])){
        
@@ -36,6 +36,7 @@
                 $telefon = $eproba;
                
             }
+        }
 
 
         if(!empty($_POST["alvazszam"])){
@@ -51,15 +52,28 @@
 
 
         
-
-
-
-
-
+         
+        try {
+            $conn = new PDO("mysql:host=localhost;dbname=hf-7","root","");	// adatbázis kapcsolat PDO-val
+            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);		// kivétel alapú hibakezelés beállítása
+        }
+        catch (PDOException $e){
+            echo "<p class='error'>Adatbázis kapcsolódási hiba: ".$e->getMessage()."</p>\n";		// PDO által dobott adatbázis hiba
+            die;
+        }
+        catch (Exception $e){
+            echo "<p class='error'>Hiba: ".$e->getMessage()."</p>\n";		// valamilyen más hiba
+            die;
+        }
     }
 
-
-
-
-
 ?>
+
+
+
+    
+
+
+
+
+
